@@ -1,5 +1,5 @@
 {
-    "name": "prooph/prooph-link-dashboard-module",
+    "name": "prooph/link-dashboard",
     "description": "Prooph LINK module that provides a dashboard view",
     "type": "library",
     "license": "BSD-3-Clause",
@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": ">=5.5",
-        "prooph/prooph-link-app-core-module" : "dev-master"
+        "prooph/link-app-core" : "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "3.7.*"
