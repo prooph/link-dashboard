@@ -3,7 +3,7 @@
     "description": "Prooph LINK module that provides a dashboard view",
     "type": "library",
     "license": "BSD-3-Clause",
-    "homepage": "https://github.com/prooph/ProophLinkDashboardModule",
+    "homepage": "https://github.com/prooph/link-dashboard",
     "authors": [
         {
             "name": "Alexander Miertsch",
