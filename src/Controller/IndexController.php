@@ -22,7 +22,7 @@ use Zend\View\Model\ViewModel;
  *
  *
  * @package Dashboard\Controller
- * @author Alexander Miertsch <alexander.miertsch.extern@sixt.com>
+ * @author Alexander Miertsch <kontakt@codeliner.ws>
  */
 class IndexController extends AbstractQueryController
 {
