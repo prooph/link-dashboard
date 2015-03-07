@@ -13,6 +13,7 @@ namespace Prooph\Link\Dashboard\Service\Factory;
 
 use Prooph\Link\Dashboard\Service\DashboardProvider;
 use Prooph\Link\Application\Projection\ProcessingConfig;
+use Prooph\Link\Dashboard\Service\WidgetBlacklist;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -34,6 +35,15 @@ class DashboardProviderFactory implements FactoryInterface
         /** @var $systemConfig ProcessingConfig */
         $systemConfig = $serviceLocator->get('prooph.link.system_config');
 
+        if ($serviceLocator->has('prooph.link.dashboard.widget_blacklist')) {
+            $blacklist = $serviceLocator->get('prooph.link.dashboard.widget_blacklist');
+
+            if (! $blacklist instanceof WidgetBlacklist) {
+                throw new \RuntimeException("Widget blacklist should implement " . WidgetBlacklist::class
+                . ". Got " . (is_object($blacklist))? get_class($blacklist) : gettype($blacklist));
+            }
+        }
+
         $controllers = [];
 
         $sortArr = [];
@@ -41,6 +51,12 @@ class DashboardProviderFactory implements FactoryInterface
         if ($systemConfig->isConfigured()) {
 
             foreach ($config['prooph.link.dashboard'] as $widgetName => $widgetConfig) {
+
+                if (isset($blacklist)) {
+                    if ($blacklist->isWidgetOnList($widgetName)) {
+                        continue;
+                    }
+                }
 
                 if (! array_key_exists('controller', $widgetConfig)) {
                     throw new \RuntimeException('controller key missing in widget config: ' . $widgetName);
