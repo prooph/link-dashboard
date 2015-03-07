@@ -27,10 +27,10 @@ class DashboardWidget extends ViewModel
      * @param string $title
      * @param int $requiredCols
      * @param null|array|\Traversable $variables
-     *
+     * @param null $newGroup
      * @return DashboardWidget
      */
-    public static function initialize($template, $title, $requiredCols, $variables = null)
+    public static function initialize($template, $title, $requiredCols, $variables = null, $newGroup = null)
     {
         Assertion::string($template);
         Assertion::string($title);
@@ -41,6 +41,7 @@ class DashboardWidget extends ViewModel
         $options = [
             'required_cols' => $requiredCols,
             'title' => $title,
+            'new_group' => $newGroup,
         ];
 
         $model = new self($variables, $options);
@@ -64,6 +65,22 @@ class DashboardWidget extends ViewModel
     public function getTitle()
     {
         return $this->getOption('title');
+    }
+
+    /**
+     * @return bool
+     */
+    public function startsNewGroup()
+    {
+        return !is_null($this->getOption('new_group'));
+    }
+
+    /**
+     * @return string
+     */
+    public function newGroupTitle()
+    {
+        return $this->getOption('new_group', '');
     }
 }
  

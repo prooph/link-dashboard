@@ -13,6 +13,7 @@ namespace Prooph\Link\Dashboard\Controller;
 
 use Prooph\Link\Application\Service\AbstractQueryController;
 use Prooph\Link\Dashboard\View\DashboardWidget;
+use Prooph\Link\Dashboard\View\WidgetConfig;
 
 /**
  * Class AbstractWidgetController
@@ -23,8 +24,21 @@ use Prooph\Link\Dashboard\View\DashboardWidget;
 abstract class AbstractWidgetController extends AbstractQueryController
 {
     /**
+     * @var WidgetConfig
+     */
+    protected $widgetConfig;
+
+    /**
      * @return DashboardWidget
      */
     abstract public function widgetAction();
+
+    /**
+     * @param WidgetConfig $widgetConfig
+     */
+    public function setWidgetConfig(WidgetConfig $widgetConfig)
+    {
+        $this->widgetConfig = $widgetConfig;
+    }
 }
  

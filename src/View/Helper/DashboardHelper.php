@@ -59,6 +59,11 @@ class DashboardHelper extends AbstractHelper
         $html = '<div class="row">';
 
         foreach ($widgets as $widget) {
+            if ($widget->startsNewGroup()) {
+                $html.= '</div><h4>'.$this->getView()->escapeHTML($widget->newGroupTitle()).'</h4><hr><div class="row">';
+                $currentCols = 0;
+            }
+
             if ($currentCols + $widget->getRequiredCols() > 12) {
                 $html.= '</div><hr><div class="row">';
                 $currentCols = 0;

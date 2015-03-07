@@ -14,6 +14,7 @@ namespace Prooph\Link\Dashboard\Service\Factory;
 use Prooph\Link\Dashboard\Service\DashboardProvider;
 use Prooph\Link\Application\Projection\ProcessingConfig;
 use Prooph\Link\Dashboard\Service\WidgetBlacklist;
+use Prooph\Link\Dashboard\View\WidgetConfig;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -72,7 +73,11 @@ class DashboardProviderFactory implements FactoryInterface
         }
 
         foreach ($sortArr as $widgetName => $order) {
-            $controllers[] = $controllerLoader->get($config['prooph.link.dashboard'][$widgetName]['controller']);
+            $controller = $controllerLoader->get($config['prooph.link.dashboard'][$widgetName]['controller']);
+
+            $controller->setWidgetConfig(new WidgetConfig($config['prooph.link.dashboard'][$widgetName]));
+
+            $controllers[] = $controller;
         }
 
         return new DashboardProvider($controllers);
