@@ -1,4 +1,5 @@
 Prooph\Link\Dashboard
+=====================
 Dashboard module for [prooph LINK](https://github.com/prooph/link)
 
 # Widgets
